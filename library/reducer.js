@@ -11,14 +11,17 @@ const init = {
     editIndex: null,
 }
 
+const dt = new Date()
+const createAt = '' + dt.getDate() + "/" + (dt.getMonth() + 1) + "/" + dt.getFullYear() + " " + dt.getHours() + ":" + dt.getMinutes()
+
 const actions = {
     add({ todos }, title) {
         if (title) {
-            todos.push({ title, completed: false })
+            todos.push({ title, completed: false, createAt: createAt })
             storage.set(todos)
         }
     },
-    toggle({todos}, index) {
+    toggle({ todos }, index) {
         const todo = todos[index]
         todo.completed = !todo.completed
         storage.set(todos)
